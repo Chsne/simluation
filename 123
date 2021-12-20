@@ -1,0 +1,17 @@
+
+.addHeader("accept","*/*")
+.addHeader("accept-encoding","gzip, deflate, br")
+.addHeader("accept-language","zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6")
+.addHeader("content-length","69")
+.addHeader("content-type","application/x-www-form-urlencoded")
+.addHeader("cookie","PHPSESSID=fuhab1akmlt9vb79kuaca7pss5; acw_tc=7250bb1816396518461977761e5224214e48348dc8de2edfc39bf2fa27; ci_session=edf434244ea9e2c5ef737d5969a48f8dcfc56ee4")
+.addHeader("origin: https","/client.ronghuiad.com")
+.addHeader("referer: https","/client.ronghuiad.com/mibmt/index.html?mz_ca=2271565&mz_sp=80LRS")
+.addHeader("sec-ch-ua","" Not A;Brand";v="99", "Chromium";v="96", "Microsoft Edge";v="96"")
+.addHeader("sec-ch-ua-mobile","?0")
+.addHeader("sec-ch-ua-platform",""macOS"")
+.addHeader("sec-fetch-dest","empty")
+.addHeader("sec-fetch-site","same-origin")
+.addHeader("sec-fetch-mode","cors")
+.addHeader("user-agent","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.57")
+
