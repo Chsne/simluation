@@ -33,7 +33,7 @@ public class infiniteLoop implements Runnable {
     public static ArrayList<String> firstClickList = new ArrayList<>();
     public static ArrayList<String> monkeyPageList = new ArrayList<>();
     public static ArrayList<String> origamiPageList = new ArrayList<>();
-
+    public static String url;
     public static int firstclick;
     public static int origamiPageClick;
     public static String[] ipPool;
@@ -242,7 +242,7 @@ public class infiniteLoop implements Runnable {
 
     public void Proxies(String content) throws IOException {
         body = new FormBody.Builder().add("content", content).build();
-        request = new Request.Builder().url(trackUrl).addHeader("user-agent", ua).addHeader("cookie", phpSession + ";" + aliCookie).post(body).build();
+        request = new Request.Builder().url(trackUrl).addHeader("referer", url).addHeader("user-agent", ua).addHeader("cookie", phpSession + ";" + aliCookie).post(body).build();
         response = client.build().newCall(request).execute();
         Time = new SimpleDateFormat("yyyy.MM.dd_HH:mm:ss").format(Calendar.getInstance().getTime());
         System.out.println(Time + "输出结果2：" + content + Objects.requireNonNull(response.body()).string());
@@ -268,7 +268,7 @@ public class infiniteLoop implements Runnable {
 
     //    发起请求获取cookie
     public void initCookie() throws IOException {
-        String url = urlList.get(new Random().nextInt(0, urlList.size() - 1));
+        url = urlList.get(new Random().nextInt(0, urlList.size() - 1));
         body = new FormBody.Builder().add("url", url).build();
         request = (new Request.Builder().addHeader("user-agent", ua).url("https://client.ronghuiad.com/wxapi.php").post(body).build());
         response = client.build().newCall(request).execute();
