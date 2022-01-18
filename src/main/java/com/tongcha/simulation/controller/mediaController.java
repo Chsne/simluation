@@ -1,5 +1,7 @@
 package com.tongcha.simulation.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.tongcha.simulation.bidding.SohuRTB;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,25 +28,26 @@ public class mediaController {
 
         SohuRTB.Request.Impression.Builder imp = SohuRTB.Request.Impression.newBuilder();
         imp.setIdx(0);
-        imp.setPid("90000");
+        imp.setPid("35547");
         imp.setBidFloor(1000);
         imp.setIsPreferredDeals(true);
-        imp.setCampaignId("103088");
-        imp.setLineId("10388");
+        imp.setCampaignId("35547");
+        imp.setLineId("35547");
 
-        SohuRTB.Request.Impression.Banner.Builder banner = SohuRTB.Request.Impression.Banner.newBuilder();
+        SohuRTB.Request.Impression.Video.Builder banner = SohuRTB.Request.Impression.Video.newBuilder();
         banner.addMimes(1);
         banner.setWidth(1920);
         banner.setHeight(1080);
-        imp.setBanner(banner);
+        imp.setVideo(banner);
 
-        SohuRTB.Request.Impression.Video.Builder video = SohuRTB.Request.Impression.Video.newBuilder();
+        SohuRTB.Request.Impression.Banner.Builder video = SohuRTB.Request.Impression.Banner.newBuilder();
         video.addMimes(4);
-        video.setDurationLimit(15);
-        video.setProtocol(1);
+//        video.setDurationLimit(15);
+//        video.setProtocol(1);
         video.setWidth(1920);
         video.setHeight(1080);
-        imp.setVideo(video);
+//        imp.setVideo(video);
+        imp.setBanner(video);
 
         BidRequest.addImpression(imp);
 
@@ -60,14 +63,15 @@ public class mediaController {
 
         byte[] bytes = BidRequest.build().toByteArray();
         String s = BidRequest.build().toString();
-        SohuRTB.Response.Builder response = null;
+        SohuRTB.Response response = null;
         HttpClient client = new HttpClient();
-        PostMethod postMethod = new PostMethod("http://localhost:8080/sohu.htm");
+        PostMethod postMethod = new PostMethod("http://127.0.0.1:8080/sohu.htm");
+//        PostMethod postMethod = new PostMethod("http://pub.hypersdesk.com/sohu.htm");
         postMethod.addRequestHeader("Content-Type", "application/octet-stream;charset=utf-8");
         postMethod.setRequestEntity(new ByteArrayRequestEntity(bytes));
         if (client.executeMethod(postMethod) == 200) {
-//            response = SohuRTB.Response.parseFrom(postMethod.getResponseBody());
-
+            response = SohuRTB.Response.parseFrom(postMethod.getResponseBodyAsStream().readAllBytes());
+            System.out.println(response);
             postMethod.releaseConnection();
             client.getHttpConnectionManager().closeIdleConnections(0);
 
@@ -76,7 +80,7 @@ public class mediaController {
             client.getHttpConnectionManager().closeIdleConnections(0);
 
         }
-        return null;
+        return response;
 
 
     }
